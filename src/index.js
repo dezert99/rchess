@@ -149,7 +149,7 @@ class Board extends React.Component{
             }
             else{
                 console.log("Valid " + (target-start));
-                if(target-start == 7 || target-start == 9 && this.state.squares[target] != null){
+                if(((target-start) == 7 || (target-start) == 9) && this.state.squares[target] != null){
                     squares[target] = "P";
                     squares[start] = null;
                     this.setState({
@@ -158,7 +158,7 @@ class Board extends React.Component{
                     this.state.start = null;
                     return;
                 }
-                else{
+                else if((target-start)==8){
                     console.log("Moving forward");
                     if(this.state.squares[target] == null){
                         console.log("Switching");
