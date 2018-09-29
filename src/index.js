@@ -121,7 +121,8 @@ class Board extends React.Component{
                 start: null,
 
             }
-            this.state.squares[0] = "P";
+            this.state.squares[0] = "BP";
+            this.state.squares[49] = "WP";
         }
         handleClick(i){
             console.log("YOu've clicked on square " + i);
@@ -132,7 +133,7 @@ class Board extends React.Component{
             }
             else{
                 console.log("Trying to move " + this.state.squares[this.state.start])
-                if(this.state.squares[this.state.start] == "P"){
+                if(this.state.squares[this.state.start] == "BP"||this.state.squares[this.state.start] == "WP"){
                     console.log("Moving "+ this.state.start+" "+i)
                     this.movePawn(this.state.start,i);
                 }
@@ -142,34 +143,70 @@ class Board extends React.Component{
         }
         movePawn(start, target){
             const squares = this.state.squares.slice();
-            if(target-start<7||target-start>9){
-                console.log("Not Valid");
-                this.state.start = null;
-                return;
-            }
-            else{
-                console.log("Valid " + (target-start));
-                if(((target-start) == 7 || (target-start) == 9) && this.state.squares[target] != null){
-                    squares[target] = "P";
-                    squares[start] = null;
-                    this.setState({
-                        squares:squares,
-                    })
+            if(squares[start]=="BP"){
+                if(target-start<7||target-start>9){
+                    console.log("Not Valid");
                     this.state.start = null;
                     return;
                 }
-                else if((target-start)==8){
-                    console.log("Moving forward");
-                    if(this.state.squares[target] == null){
-                        console.log("Switching");
-                        squares[target] = "P";
+                else{
+                    console.log("Valid " + (target-start));
+                    if(((target-start) == 7 || (target-start) == 9) && this.state.squares[target] != null){
+                        squares[target] = "BP";
                         squares[start] = null;
                         this.setState({
                             squares:squares,
                         })
                         this.state.start = null;
-                        console.log(this.state.squares);
                         return;
+                    }
+                    else if((target-start)==8){
+                        console.log("Moving forward");
+                        if(this.state.squares[target] == null){
+                            console.log("Switching");
+                            squares[target] = "BP";
+                            squares[start] = null;
+                            this.setState({
+                                squares:squares,
+                            })
+                            this.state.start = null;
+                            console.log(this.state.squares);
+                            return;
+                        }
+                    }
+                }
+            }
+            else if(squares[start]=="WP"){
+                console.log("White Piece");
+                if((start-target)<7 || (start-target) >9){
+                    console.log("Not valid");
+                    this.state.start = null;
+                    return;
+                }
+                else{
+                    console.log("Valid "+(start-target));
+                    if(((start-target) == 7 || (start-target) == 9) && this.state.squares[target] != null){
+                        squares[target] = "WP";
+                        squares[start] = null;
+                        this.setState({
+                            squares:squares,
+                        })
+                        this.state.start = null;
+                        return;
+                    }
+                    else if((start-target)==8){
+                        console.log("Moving forward");
+                        if(this.state.squares[target] == null){
+                            console.log("Switching");
+                            squares[target] = "WP";
+                            squares[start] = null;
+                            this.setState({
+                                squares:squares,
+                            })
+                            this.state.start = null;
+                            console.log(this.state.squares);
+                            return;
+                        }
                     }
                 }
             }
