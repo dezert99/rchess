@@ -106,7 +106,7 @@ class Board extends React.Component{
                 {this.renderSquare(this.props.squares[60],"LightGray", 60)}
                 {this.renderSquare(this.props.squares[61],"white", 61)}
                 {this.renderSquare(this.props.squares[62],"LightGray", 62)}
-                {this.renderSquarethis.props.squares([63],"white", 63)}
+                {this.renderSquare(this.props.squares[63],"white", 63)}
             </div>
             </div>
         );
